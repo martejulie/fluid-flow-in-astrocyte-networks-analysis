@@ -1,7 +1,9 @@
-# Neural activity induces strongly coupled electro-chemo-mechanical interactions and fluid flow in astrocyte networks and extracellular space – a computational study
+# Supplementary code, Sætra et al. 2023
 
 This repository contains code that reproduces the main results
-presented in Sætra et al. 2023 [XXX]. 
+presented in Sætra et al. 2023, 
+Neural activity induces strongly coupled electro-chemo-mechanical interactions 
+and fluid flow in astrocyte networks and extracellular space – a computational study.
 
 ## Requirements
 
