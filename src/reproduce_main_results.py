@@ -16,14 +16,14 @@ def run_model(model_v, j_in):
     # mesh
     N = 400                                  # mesh size
     L = 3.0e-4                               # m (300 um)
-    mesh = df.IntervalMesh(N, 0, L)             # create mesh
+    mesh = df.IntervalMesh(N, 0, L)          # create mesh
 
     # time variables
     dt_value = 1e-3                          # time step (s)
     Tstop = 250                              # end time (s)
 
     # model setup
-    t_PDE = df.Constant(0.0)                    # time constant
+    t_PDE = df.Constant(0.0)                 # time constant
 
     if model_v == "M0":
         model = zero_flow_model.Model(mesh, L, t_PDE, j_in, stim_start=10, stim_end=210)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     model_M4, path_data_M0 = run_model(model_v, j_in)
 
     # create plotter object for visualizing results
-    P = Plotter(model_M1, path_data_M1, path_data_M2, path_data_M3, path_data_M0, verbose=True)
+    P = Plotter(model_M1, path_data_M1, path_data_M2, path_data_M3, path_data_M0, verbose=False)
 
     # check that directory for figures exists, if not create
     path_figs = '../results/figures/'

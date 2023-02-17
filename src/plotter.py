@@ -78,8 +78,8 @@ class Plotter():
         self.h5_fname_PDE_I = path_data + 'PDE/results.h5'
 
         # create mesh and read data file
-        hdf5_PDE_I = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_I, 'r')
-        hdf5_PDE_I.read(self.mesh_PDE, '/mesh', False)
+        self.hdf5_PDE_I = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_I, 'r')
+        self.hdf5_PDE_I.read(self.mesh_PDE, '/mesh', False)
 
         return
 
@@ -88,8 +88,8 @@ class Plotter():
         self.h5_fname_PDE_II = path_data + 'PDE/results.h5'
 
         # read data file
-        self.hdf5_II = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_II, 'r')
-        self.hdf5_II.read(self.mesh_PDE, '/mesh', False)
+        self.hdf5_PDE_II = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_II, 'r')
+        self.hdf5_PDE_II.read(self.mesh_PDE, '/mesh', False)
 
         return
 
@@ -98,8 +98,8 @@ class Plotter():
         self.h5_fname_PDE_III = path_data + 'PDE/results.h5'
 
         # read data file
-        self.hdf5_III = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_III, 'r')
-        self.hdf5_III.read(self.mesh_PDE, '/mesh', False)
+        self.hdf5_PDE_III = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_III, 'r')
+        self.hdf5_PDE_III.read(self.mesh_PDE, '/mesh', False)
 
         return
 
@@ -108,8 +108,8 @@ class Plotter():
         self.h5_fname_PDE_0 = path_data + 'PDE/results.h5'
 
         # read data file
-        self.hdf5_0 = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_0, 'r')
-        self.hdf5_0.read(self.mesh_PDE, '/mesh', False)
+        self.hdf5_PDE_0 = df.HDF5File(df.MPI.comm_world, self.h5_fname_PDE_0, 'r')
+        self.hdf5_PDE_0.read(self.mesh_PDE, '/mesh', False)
 
         return
 
@@ -206,7 +206,7 @@ class Plotter():
         """ Plot input/decay-currents, changes in ECS and ICS ion concentrations,
         changes in ECS and ICS volume fractions,
         changes in transmembrane hydrostatic pressure,
-        and membrane potential over time, measured at t = point_time. """
+        and membrane potential over time, measured at x = point_time. """
 
         # get parameters
         K_m = self.model.params['K_m']
@@ -343,7 +343,6 @@ class Plotter():
 
         # save figure to file
         fname_res = path_figs + 'Figure2'
-        plt.savefig(fname_res + '.svg', format='svg')
         plt.savefig(fname_res + '.pdf', format='pdf')
         plt.close()
 
@@ -518,7 +517,6 @@ class Plotter():
 
         # save figure to file
         fname_res = path_figs + 'Figure3'
-        plt.savefig(fname_res + '.svg', format='svg')
         plt.savefig(fname_res + '.pdf', format='pdf')
         plt.close()
 
