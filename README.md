@@ -1,6 +1,6 @@
-# Supplementary code, Sætra et al. 2023
+# Supplementary code: Sætra et al. 2023
 
-This repository contains code that reproduces the main results
+This repository contains code to reproduce the main results
 presented in Sætra et al. 2023, 
 Neural activity induces strongly coupled electro-chemo-mechanical interactions 
 and fluid flow in astrocyte networks and extracellular space – a computational study.
@@ -12,6 +12,6 @@ This code requires that you have the `ffian` package installed, see
 
 ## Reproducing the results of the paper
 
-To reproduce Figures 2 -- 6 from the paper, run `reproduce_main_results.py`
-from the src folder. Note that this might run for a few of days on a normal
+To reproduce Figures 2 - 6 from the paper, run `reproduce_main_results.py`
+from the src folder. Note that this might run for a few days on a normal
 computer. 
