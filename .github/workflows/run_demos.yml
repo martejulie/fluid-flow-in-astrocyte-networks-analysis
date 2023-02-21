@@ -1,0 +1,38 @@
+name: Run demos 
+
+on:
+  push:
+    # The CI is executed on every push on every branch
+    branches:
+      - main
+  pull_request:
+    # The CI is executed on every pull request to the main branch
+    branches:
+      - main
+  # Weekly build on Mondays at 8 am
+  schedule:
+    - cron: "0 8 * * 1"
+
+jobs:
+
+  test-code:
+    # This code depends on the result of check-code
+    runs-on: ubuntu-22.04
+    container: ghcr.io/scientificcomputing/fenics:2023-01-16
+    
+    steps:
+
+      - uses: actions/checkout@v3
+      - name: "Install plotting packages" 
+        run: |
+            apt-get update
+            apt-get install -y texlive-latex-base texlive-latex-extra cm-super --no-install-recommends dvipng
+      - name: "Install ffian"
+        run: |
+            git clone https://github.com/martejulie/fluid-flow-in-astrocyte-networks.git
+            python3 -m pip install fluid-flow-in-astrocyte-networks
+
+      - name: Run demo 
+        run: |
+            cd src
+            python3 reproduce_main_results.py --Tstop=10 --stim_start=2 --stim_end=8
