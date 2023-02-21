@@ -36,3 +36,11 @@ jobs:
         run: |
             cd src
             python3 reproduce_main_results.py --Tstop=10 --stim_start=2 --stim_end=8
+
+      - name: Upload demo plots
+        uses: actions/upload-artifact@v3
+        with:
+          name: results 
+          path: results/figures
+          retention-days: 3
+          if-no-files-found: error
