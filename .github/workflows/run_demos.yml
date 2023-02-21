@@ -30,7 +30,7 @@ jobs:
       - name: "Install ffian"
         run: |
             git clone https://github.com/martejulie/fluid-flow-in-astrocyte-networks.git
-            python3 -m pip install fluid-flow-in-astrocyte-networks
+            python3 -m pip install ./fluid-flow-in-astrocyte-networks
 
       - name: Run demo 
         run: |
