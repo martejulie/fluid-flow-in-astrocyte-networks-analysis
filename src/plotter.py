@@ -287,23 +287,23 @@ class Plotter():
 
         ax1 = fig.add_subplot(4, 2, 1, xlim=xlim_T, ylim=[-0.25, 1.0])
         plt.ylabel(r'$j\mathrm{^K_{input}}$($\mu$mol/(m$^2$s))', fontsize=fosi)
-        plt.plot(j_ins, color='k', linestyle='dotted', linewidth=lw)
+        plt.plot(j_ins, color='dimgrey', linewidth=lw)
 
         ax2 = fig.add_subplot(4, 2, 2, xlim=xlim_T, ylim=[-0.25, 1.0])
         plt.ylabel(r'$j\mathrm{^K_{decay}}$($\mu$mol/(m$^2$s))', fontsize=fosi)
-        plt.plot(j_decs, color='k', linewidth=lw)
+        plt.plot(j_decs, color='dimgrey', linewidth=lw)
 
         ax3 = fig.add_subplot(4, 2, 3, xlim=xlim_T, ylim=[-20, 10])
         plt.ylabel(r'$\Delta [k]_\mathrm{e}$ (mM)', fontsize=fosi)
         plt.plot(np.array(Na_es)-Na_es[0], color=b0, label=r'Na$^+$', linewidth=lw)
-        plt.plot(np.array(K_es)-K_es[0], color=b1, label=r'K$^+$', linestyle='dotted', linewidth=lw)
-        plt.plot(np.array(Cl_es)-Cl_es[0], color=b2, label=r'Cl$^-$', linestyle='dashed', linewidth=lw)
+        plt.plot(np.array(K_es)-K_es[0], color=b1, label=r'K$^+$', linewidth=lw)
+        plt.plot(np.array(Cl_es)-Cl_es[0], color=b2, label=r'Cl$^-$', linewidth=lw)
 
         ax4 = fig.add_subplot(4, 2, 4, xlim=xlim_T, ylim=[-20, 10])
         plt.ylabel(r'$\Delta [k]_\mathrm{i}$ (mM)', fontsize=fosi)
         plt.plot(np.array(Na_is)-Na_is[0], color=b0, linewidth=lw)
-        plt.plot(np.array(K_is)-K_is[0], color=b1, linestyle='dotted', linewidth=lw)
-        plt.plot(np.array(Cl_is)-Cl_is[0], color=b2, linestyle='dashed', linewidth=lw)
+        plt.plot(np.array(K_is)-K_is[0], color=b1, linewidth=lw)
+        plt.plot(np.array(Cl_is)-Cl_is[0], color=b2, linewidth=lw)
 
         ax5 = fig.add_subplot(4, 2, 5, xlim=xlim_T, ylim=[-30, 1])
         plt.ylabel(r'$\Delta \alpha_\mathrm{e}$ (\%) ', fontsize=fosi)
@@ -469,33 +469,33 @@ class Plotter():
         plt.xticks(xticks, xticklabels)
         plt.ylabel(r'$\Delta$O (mM)')
         df.plot(dOsm_e, label=r'ECS', color=colors[2], linewidth=lw)
-        df.plot(dOsm_i, label=r'ICS', color='k', linewidth=lw, linestyle='dotted')
+        df.plot(dOsm_i, color='dimgrey', linewidth=lw, linestyle='dotted')
 
         ax2 = fig.add_subplot(2, 3, 2, xlim=xlim, ylim=[-800, 200])
         plt.xticks(xticks, xticklabels)
         plt.ylabel(r'$\Delta(\Pi_\mathrm{i}-\Pi_\mathrm{e})$ and $\Delta(p_\mathrm{i}-p_\mathrm{e})$ (Pa)')
         df.plot(dPi_m, label=r'$\Delta(\Pi_\mathrm{i}-\Pi_\mathrm{e})$', color=c1, linewidth=lw)
         df.plot(dp_m, label=r'$\Delta(p_\mathrm{i}-p_\mathrm{e})$', color=c2,
-                linewidth=lw, linestyle=(0, (3, 1, 1, 1, 1, 1)))
+                linewidth=lw)
 
         ax3 = fig.add_subplot(2, 3, 3, xlim=xlim, ylim=[-0.003, 0.001])
         plt.xticks(xticks, xticklabels)
         plt.ylabel(r'$w_\mathrm{m}$ ($\mu$m/min)')
-        df.plot(w_m, color=c0, linewidth=lw, linestyle=(0, (5, 1)))
+        df.plot(w_m, color=c0, linewidth=lw)
 
         ax4 = fig.add_subplot(2, 3, 4, xlim=xlim, ylim=[-100, 30])
         plt.xticks(xticks, xticklabels)
         plt.xlabel(xlabel_x, fontsize=fosi)
         plt.ylabel(r'$\Delta p$ (Pa)')
         df.plot(dp_e, color=colors[2], linewidth=lw)
-        df.plot(dp_i, color='k', linewidth=lw, linestyle='dotted')
+        df.plot(dp_i, label=r'ICS', color='dimgrey', linewidth=lw)
 
         ax5 = fig.add_subplot(2, 3, 5, xlim=xlim, ylim=[-0.35, 0.35])
         plt.xticks(xticks, xticklabels)
         plt.xlabel(xlabel_x, fontsize=fosi)
         plt.ylabel(r'$\alpha u$ ($\mu$m/min)')
         df.plot(u_e, color=colors[2], linewidth=lw)
-        df.plot(u_i, color='k', linewidth=lw, linestyle='dotted')
+        df.plot(u_i, color='dimgrey', linewidth=lw)
 
         ax6 = fig.add_subplot(2, 3, 6)
 
@@ -815,15 +815,15 @@ class Plotter():
         plt.ylabel(r'$\alpha_\mathrm{i} u_\mathrm{i}$ ($\mu$m/min)', fontsize=fosi)
         plt.xticks(xticks, xticklabels)
         df.plot(u_i_osm, color=c5, linewidth=lw)
-        df.plot(u_i_hyd, color=c3, linewidth=lw, linestyle='dotted')
-        df.plot(u_i_tot, color='k', linewidth=lw, linestyle='dashed')
+        df.plot(u_i_hyd, color=c3, linewidth=lw)
+        df.plot(u_i_tot, color='k', linewidth=lw)
 
         ax2 = fig.add_subplot(2, 2, 2, xlim=xlim, ylim=[-90, 90])
         plt.title(r'(M2)', fontsize=fosi)
         plt.ylabel(r'$\alpha_\mathrm{e} u_\mathrm{e}$ ($\mu$m/min)', fontsize=fosi)
         plt.xticks(xticks, xticklabels)
-        df.plot(u_e_hyd, color=c3, linewidth=lw, linestyle='dotted')
-        df.plot(u_e_tot, color='k', linewidth=lw, linestyle='dashed')
+        df.plot(u_e_hyd, color=c3, linewidth=lw)
+        df.plot(u_e_tot, color='k', linewidth=lw)
 
         # get data M3
         alpha_i = self.read_from_file_III(n, 0)
@@ -862,17 +862,17 @@ class Plotter():
         plt.xlabel(xlabel_x, fontsize=fosi)
         plt.xticks(xticks, xticklabels)
         df.plot(u_i_osm, color=c5, label='osmotic', linewidth=lw)
-        df.plot(u_i_hyd, color=c3, linewidth=lw, linestyle='dotted')
-        df.plot(u_i_tot, color='k', linewidth=lw, linestyle='dashed')
+        df.plot(u_i_hyd, color=c3, linewidth=lw)
+        df.plot(u_i_tot, color='k', linewidth=lw)
 
         ax4 = fig.add_subplot(2, 2, 4, xlim=xlim, ylim=[-90, 90])
         plt.title(r'(M3)', fontsize=fosi)
         plt.ylabel(r'$\alpha_\mathrm{e} u_\mathrm{e}$ ($\mu$m/min)', fontsize=fosi)
         plt.xlabel(xlabel_x, fontsize=fosi)
         plt.xticks(xticks, xticklabels)
-        df.plot(u_e_hyd, label='hydrostatic', color=c3, linewidth=lw, linestyle='dotted')
+        df.plot(u_e_hyd, label='hydrostatic', color=c3, linewidth=lw)
         df.plot(u_e_eof, label='electro-osmotic', color=c4, linewidth=lw)
-        df.plot(u_e_tot, label='total', color='k', linewidth=lw, linestyle='dashed')
+        df.plot(u_e_tot, label='total', color='k', linewidth=lw)
 
         plt.figlegend(bbox_to_anchor=(0.98, 0.94))
 
@@ -1047,7 +1047,7 @@ class Plotter():
         df.plot(j_e_diff_K, label='diffusion', color=c3, linewidth=3)
         df.plot(j_e_field_K, label='electric drift', color=c4, linewidth=3)
         df.plot(j_e_flow_K, label='advection', color=c5, linewidth=3)
-        df.plot(j_e_K, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_e_K, color='dimgrey', linewidth=3)
         ax1.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_K_e_diff, 3))), horizontalalignment='left', verticalalignment='center', transform=ax1.transAxes, size=16)
         ax1.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_K_e_drift, 3))), horizontalalignment='left', verticalalignment='center', transform=ax1.transAxes, size=16)
 
@@ -1057,7 +1057,7 @@ class Plotter():
         df.plot(j_e_diff_Na, color=c3, linewidth=3)
         df.plot(j_e_field_Na, color=c4, linewidth=3)
         df.plot(j_e_flow_Na, color=c5, linewidth=3)
-        df.plot(j_e_Na, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_e_Na, color='dimgrey', linewidth=3)
         ax2.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_Na_e_diff, 3))), horizontalalignment='left', verticalalignment='center', transform=ax2.transAxes, size=16)
         ax2.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_Na_e_drift, 3))), horizontalalignment='left', verticalalignment='center', transform=ax2.transAxes, size=16)
 
@@ -1079,7 +1079,7 @@ class Plotter():
         df.plot(j_i_diff_K, color=c3, linewidth=3)
         df.plot(j_i_field_K, color=c4, linewidth=3)
         df.plot(j_i_flow_K, color=c5, linewidth=3)
-        df.plot(j_i_K, color='dimgrey', label='total', linewidth=3, linestyle='dashed')
+        df.plot(j_i_K, color='dimgrey', label='total', linewidth=3)
         ax4.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_K_i_diff, 3))), horizontalalignment='left', verticalalignment='center', transform=ax4.transAxes, size=16)
         ax4.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_K_i_drift, 3))), horizontalalignment='left', verticalalignment='center', transform=ax4.transAxes, size=16)
 
@@ -1089,7 +1089,7 @@ class Plotter():
         df.plot(j_i_diff_Na, color=c3, linewidth=3)
         df.plot(j_i_field_Na, color=c4, linewidth=3)
         df.plot(j_i_flow_Na, color=c5, linewidth=3)
-        df.plot(j_i_Na, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_i_Na, color='dimgrey', linewidth=3)
         ax5.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_Na_i_diff, 3))), horizontalalignment='left', verticalalignment='center', transform=ax5.transAxes, size=16)
         ax5.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_Na_i_drift, 3))), horizontalalignment='left', verticalalignment='center', transform=ax5.transAxes, size=16)
 
@@ -1237,7 +1237,7 @@ class Plotter():
         df.plot(j_e_diff_K, color=c3, linewidth=3)
         df.plot(j_e_field_K, color=c4, linewidth=3)
         df.plot(j_e_flow_K, color=c5, linewidth=3)
-        df.plot(j_e_K, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_e_K, color='dimgrey', linewidth=3)
         ax7.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_K_e_diff, 3))),
                  horizontalalignment='left', verticalalignment='center', transform=ax7.transAxes, size=16)
         ax7.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_K_e_drift, 3))),
@@ -1249,7 +1249,7 @@ class Plotter():
         df.plot(j_e_diff_Na, color=c3, linewidth=3)
         df.plot(j_e_field_Na, color=c4, linewidth=3)
         df.plot(j_e_flow_Na, color=c5, linewidth=3)
-        df.plot(j_e_Na, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_e_Na, color='dimgrey', linewidth=3)
         ax8.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_Na_e_diff, 3))),
                  horizontalalignment='left', verticalalignment='center', transform=ax8.transAxes, size=16)
         ax8.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_Na_e_drift, 3))),
@@ -1262,7 +1262,7 @@ class Plotter():
         df.plot(j_e_diff_Cl, color=c3, linewidth=3)
         df.plot(j_e_field_Cl, color=c4, linewidth=3)
         df.plot(j_e_flow_Cl, color=c5, linewidth=3)
-        df.plot(j_e_Cl, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_e_Cl, color='dimgrey', linewidth=3)
         ax9.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_Cl_e_diff, 3))),
                  horizontalalignment='left', verticalalignment='center', transform=ax9.transAxes, size=16)
         ax9.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_Cl_e_drift, 3))),
@@ -1276,7 +1276,7 @@ class Plotter():
         df.plot(j_i_diff_K, color=c3, linewidth=3)
         df.plot(j_i_field_K, color=c4, linewidth=3)
         df.plot(j_i_flow_K, color=c5, linewidth=3)
-        df.plot(j_i_K, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_i_K, color='dimgrey', linewidth=3)
         ax10.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_K_i_diff, 3))),
                   horizontalalignment='left', verticalalignment='center', transform=ax10.transAxes, size=16)
         ax10.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_K_i_drift, 3))),
@@ -1289,7 +1289,7 @@ class Plotter():
         df.plot(j_i_diff_Na, color=c3, linewidth=3)
         df.plot(j_i_field_Na, color=c4, linewidth=3)
         df.plot(j_i_flow_Na, color=c5, linewidth=3)
-        df.plot(j_i_Na, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_i_Na, color='dimgrey', linewidth=3)
         ax11.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_Na_i_diff, 3))),
                   horizontalalignment='left', verticalalignment='center', transform=ax11.transAxes, size=16)
         ax11.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_Na_i_drift, 3))),
@@ -1302,7 +1302,7 @@ class Plotter():
         df.plot(j_i_diff_Cl, color=c3, linewidth=3)
         df.plot(j_i_field_Cl, color=c4, linewidth=3)
         df.plot(j_i_flow_Cl, color=c5, linewidth=3)
-        df.plot(j_i_Cl, color='dimgrey', linewidth=3, linestyle='dashed')
+        df.plot(j_i_Cl, color='dimgrey', linewidth=3)
         ax12.text(0.03, 0.13, r'F\textsubscript{diff} = ' + str(abs(round(F_Cl_i_diff, 3))),
                   horizontalalignment='left', verticalalignment='center', transform=ax12.transAxes, size=16)
         ax12.text(0.03, 0.05, r'F\textsubscript{drift} = ' + str(abs(round(F_Cl_i_drift, 3))),
