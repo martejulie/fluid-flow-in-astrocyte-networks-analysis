@@ -304,6 +304,15 @@ class Plotter():
         plt.plot(np.array(Na_is)-Na_is[0], color=b0, linewidth=lw)
         plt.plot(np.array(K_is)-K_is[0], color=b1, linewidth=lw)
         plt.plot(np.array(Cl_is)-Cl_is[0], color=b2, linewidth=lw)
+        
+        axin4 = ax4.inset_axes([0.5, 0.1, 0.45, 0.28])
+        axin4.plot(np.array(Na_is)-Na_is[0], color=b0, linewidth=lw)
+        axin4.plot(np.array(K_is)-K_is[0], color=b1, linewidth=lw)
+        axin4.plot(np.array(Cl_is)-Cl_is[0], color=b2, linewidth=lw)
+        axin4.set_ylim([-10, 10])
+        axin4.set_xlim([0, 50])
+        axin4.spines['right'].set_visible(False)
+        axin4.spines['top'].set_visible(False)
 
         ax5 = fig.add_subplot(4, 2, 5, xlim=xlim_T, ylim=[-30, 1])
         plt.ylabel(r'$\Delta \alpha_\mathrm{e}$ (\%) ', fontsize=fosi)
@@ -312,6 +321,13 @@ class Plotter():
         ax6 = fig.add_subplot(4, 2, 6, xlim=xlim_T, ylim=[-1, 30])
         plt.ylabel(r'$\Delta \alpha_\mathrm{i}$ (\%) ', fontsize=fosi)
         plt.plot(dalpha_is, color=c0, linewidth=lw)
+
+        axin6 = ax6.inset_axes([0.5, 0.62, 0.45, 0.28])
+        axin6.plot(dalpha_is, color=c0, linewidth=lw)
+        axin6.set_ylim([-1, 15])
+        axin6.set_xlim([200, 250])
+        axin6.spines['right'].set_visible(False)
+        axin6.spines['top'].set_visible(False)
 
         ax7 = fig.add_subplot(4, 2, 7, xlim=xlim_T)
         plt.ylabel(r'$\Delta(p_\mathrm{i}- p_\mathrm{e})$ (Pa)', fontsize=fosi)
