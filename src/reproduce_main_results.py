@@ -102,6 +102,6 @@ if __name__ == '__main__':
     P1.plot_osmotic_pressures_and_water_potentials(path_figs, args.stim_end)
     P1.plot_M2_and_M3_fluid_velocities(path_figs, args.stim_end)
     P1.plot_ion_fluxes(path_figs, args.stim_end)
-    if mode == 'paper':
+    if args.mode == 'paper':
         P2.plot_pulsatile_dynamics(path_figs, args.Tstop)
         P2.plot_pulsatile_velocities(path_figs, args.Tstop)
