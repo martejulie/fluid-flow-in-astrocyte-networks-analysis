@@ -58,7 +58,7 @@ if __name__ == '__main__':
     parser.add_argument("--Tstop", default=250, type=int, dest="Tstop", help="Simulation end time")
     parser.add_argument("--stim_start", default=10, type=int, dest="stim_start", help="Stimuli onset")
     parser.add_argument("--stim_end", default=210, type=int, dest="stim_end", help="Stimuli offset")
-    parser.add_argument("--mode", default='paper', type=int, dest="mode", help="mode (paper or demo)")
+    parser.add_argument("--mode", default='paper', type=str, dest="mode", help="mode (paper or demo)")
     args = parser.parse_args()
 
     # run model setup M1
