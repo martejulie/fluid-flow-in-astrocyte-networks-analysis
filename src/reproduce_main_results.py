@@ -58,6 +58,7 @@ if __name__ == '__main__':
     parser.add_argument("--Tstop", default=250, type=int, dest="Tstop", help="Simulation end time")
     parser.add_argument("--stim_start", default=10, type=int, dest="stim_start", help="Stimuli onset")
     parser.add_argument("--stim_end", default=210, type=int, dest="stim_end", help="Stimuli offset")
+    parser.add_argument("--mode", default='paper', type=int, dest="mode", help="mode (paper or demo)")
     args = parser.parse_args()
 
     # run model setup M1
@@ -101,5 +102,6 @@ if __name__ == '__main__':
     P1.plot_osmotic_pressures_and_water_potentials(path_figs, args.stim_end)
     P1.plot_M2_and_M3_fluid_velocities(path_figs, args.stim_end)
     P1.plot_ion_fluxes(path_figs, args.stim_end)
-    P2.plot_pulsatile_dynamics(path_figs, args.Tstop)
-    P2.plot_pulsatile_velocities(path_figs, args.Tstop)
+    if mode == 'paper':
+        P2.plot_pulsatile_dynamics(path_figs, args.Tstop)
+        P2.plot_pulsatile_velocities(path_figs, args.Tstop)
