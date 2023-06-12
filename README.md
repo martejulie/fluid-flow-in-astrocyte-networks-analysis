@@ -12,6 +12,6 @@ This code requires that you have the `ffian` package installed, see
 
 ## Reproducing the results of the paper
 
-To reproduce Figures 2 - 6 from the paper, run `reproduce_main_results.py`
+To reproduce Figures 2 - 8 from the paper, run `reproduce_main_results.py`
 from the src folder. Note that this might run for a few days on a normal
 computer. 
