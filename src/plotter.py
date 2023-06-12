@@ -308,7 +308,7 @@ class Plotter():
         plt.plot(np.array(Na_is)-Na_is[0], color=b0, linewidth=lw)
         plt.plot(np.array(K_is)-K_is[0], color=b1, linewidth=lw)
         plt.plot(np.array(Cl_is)-Cl_is[0], color=b2, linewidth=lw)
-        
+
         axin4 = ax4.inset_axes([0.5, 0.1, 0.45, 0.28])
         axin4.plot(np.array(Na_is)-Na_is[0], color=b0, linewidth=lw)
         axin4.plot(np.array(K_is)-K_is[0], color=b1, linewidth=lw)
@@ -1354,14 +1354,13 @@ class Plotter():
         return
 
     def plot_pulsatile_dynamics(self, path_figs, Tstop):
-        """ Plot input-currents, extracellular potentials, 
+        """ Plot input-currents, extracellular potentials,
         changes in ECS potassium concentrations, and
         changes in ECS volume fractions over time,
         measured at x = point_time, for slow, ultraslow, and
         constant stimuli. """
 
         # get parameters
-        alpha_i_init = float(self.model.alpha_i_init)
         alpha_e_init = float(self.model.alpha_e_init)
         L_in = 0.1*self.model.L     # length of input zone (m)
         L1 = self.model.L/2-L_in/2
@@ -1385,7 +1384,6 @@ class Plotter():
             # get data
             alpha_i = self.read_from_file_II(n, 0)
             K_e = self.read_from_file_II(n, 4)
-            phi_i = self.read_from_file_II(n, 7)
             phi_e = self.read_from_file_II(n, 8)
 
             # calculate extracellular volume fraction
@@ -1393,7 +1391,7 @@ class Plotter():
 
             # get input/decay fluxes
             j_in_ = df.Expression('(x[0] > L1)*(x[0] < L2)*(t >= tS)*(t <= tE)*(j_in/2*sin(2*pi*t) + j_in/2)',
-                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t, \
+                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t,
                        tS=self.model.stim_start, tE=self.model.stim_end, degree=1)
             j_in = self.project_to_function_space(j_in_*1e6)    # convert to umol/(m^2s)
             t += 10e-3
@@ -1419,7 +1417,6 @@ class Plotter():
             # get data
             alpha_i = self.read_from_file_III(n, 0)
             K_e = self.read_from_file_III(n, 4)
-            phi_i = self.read_from_file_III(n, 7)
             phi_e = self.read_from_file_III(n, 8)
 
             # calculate extracellular volume fraction
@@ -1427,7 +1424,7 @@ class Plotter():
 
             # get input/decay fluxes
             j_in_ = df.Expression('(x[0] > L1)*(x[0] < L2)*(t >= tS)*(t <= tE)*(j_in/2*sin(2*pi*t*0.05) + j_in/2)',
-                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t, \
+                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t,
                        tS=self.model.stim_start, tE=self.model.stim_end, degree=1)
             j_in = self.project_to_function_space(j_in_*1e6)    # convert to umol/(m^2s)
             t += 0.5
@@ -1440,7 +1437,7 @@ class Plotter():
             phi_es_ultraslow.append(phi_e(point)*1000)       # convert to mV
             K_es_ultraslow.append(K_e(point))
             dalpha_es_ultraslow.append(alpha_e_diff)
-        
+
         # list of function values at point
         j_ins_constant = []
         K_es_constant = []
@@ -1452,7 +1449,6 @@ class Plotter():
             # get data
             alpha_i = self.read_from_file_I(n, 0)
             K_e = self.read_from_file_I(n, 4)
-            phi_i = self.read_from_file_I(n, 7)
             phi_e = self.read_from_file_I(n, 8)
 
             # calculate extracellular volume fraction
@@ -1460,7 +1456,7 @@ class Plotter():
 
             # get input/decay fluxes
             j_in_ = df.Expression('(x[0] > L1)*(x[0] < L2)*(t >= tS)*(t <= tE)*j_in',
-                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=n, \
+                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=n,
                        tS=self.model.stim_start, tE=self.model.stim_end, degree=1)
             j_in = self.project_to_function_space(j_in_*1e6)   # convert to umol/(m^2s)
 
@@ -1481,7 +1477,7 @@ class Plotter():
         plt.ylabel(r'$j\mathrm{^K_{input}}$($\mu$mol/(m$^2$s))', fontsize=fosi)
         plt.title(r'1 Hz', fontsize=fosi)
         plt.plot(j_ins_slow, color=colors[0], linewidth=lw, zorder=10)
-       
+
         ax2 = fig.add_subplot(4, 3, 2, ylim=[-0.05, 1.0])
         plt.title(r'0.05 Hz', fontsize=fosi)
         plt.plot(j_ins_ultraslow, color=colors[2], linewidth=lw)
@@ -1489,7 +1485,7 @@ class Plotter():
         ax3 = fig.add_subplot(4, 3, 3, xlim=xlim_T, ylim=[-0.05, 1.0])
         plt.title(r'constant', fontsize=fosi)
         plt.plot(j_ins_constant, color=colors[3], linewidth=lw)
-        
+
         ax4 = fig.add_subplot(4, 3, 4, ylim=[-3, 0.1])
         plt.ylabel(r'$\phi_\mathrm{e}$ (mV)', fontsize=fosi)
         plt.plot(phi_es_slow, color=colors[0], linewidth=lw, zorder=10)
@@ -1528,11 +1524,11 @@ class Plotter():
 
         # make pretty
         ax.axis('off')
-       
+
         # add numbering for the subplots (A, B, C etc)
-        letters = [r'\textbf{A}', r'\textbf{B}', r'\textbf{C}', 
-                   r'\textbf{D}', r'\textbf{E}', r'\textbf{F}', 
-                   r'\textbf{G}', r'\textbf{H}', r'\textbf{I}', 
+        letters = [r'\textbf{A}', r'\textbf{B}', r'\textbf{C}',
+                   r'\textbf{D}', r'\textbf{E}', r'\textbf{F}',
+                   r'\textbf{G}', r'\textbf{H}', r'\textbf{I}',
                    r'\textbf{J}', r'\textbf{K}', r'\textbf{L}']
         for num, ax in enumerate([ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9, ax10, ax11, ax12]):
             ax.text(-0.2, 1.05, letters[num], transform=ax.transAxes, size=22, weight='bold')
@@ -1541,11 +1537,11 @@ class Plotter():
             ax.spines['top'].set_visible(False)
 
         for ax in [ax1, ax4, ax7, ax10]:
-            ax.set_xlim([0,300])
+            ax.set_xlim([0, 300])
             ax.set_xticks([0, 100, 200, 300])
             ax.set_xticklabels([100, 101, 102, 103])
         for ax in [ax2, ax5, ax8, ax11]:
-            ax.set_xlim([0,120])
+            ax.set_xlim([0, 120])
             ax.set_xticks([0, 20, 40, 60, 80, 100, 120])
             ax.set_xticklabels([100, 110, 120, 130, 140, 150, 160])
         for ax in [ax3, ax6, ax9, ax12]:
@@ -1565,7 +1561,7 @@ class Plotter():
         """ Plot fluid velocities for slow, ultraslow,
         and constant stimuli. """
 
-        # get parameters 
+        # get parameters
         temperature = self.model.params['temperature']
         R = self.model.params['R']
         a_i = self.model.params['a'][0]
@@ -1609,8 +1605,8 @@ class Plotter():
         u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
         # project to function space
-        u_i_tot_slow_II = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
-    
+        u_i_tot_slow_II = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
+
         n = int(100.75*1e3)
         alpha_i = self.read_from_file_II(n, 0)
         p_e = self.read_from_file_II(n, 9)
@@ -1631,7 +1627,7 @@ class Plotter():
         fig = plt.figure(figsize=(15*fs, 10*fs))
         ax = plt.gca()
 
-        ax1 = fig.add_subplot(2,3,1, xlim=xlim, ylim=[-15, 15])
+        ax1 = fig.add_subplot(2, 3, 1, xlim=xlim, ylim=[-15, 15])
         plt.ylabel(r'$\alpha_\mathrm{i} u_\mathrm{i}$ ($\mu$m/min)', fontsize=fosi)
         plt.title(r'1 Hz', fontsize=fosi)
         plt.xlabel(xlabel_x, fontsize=fosi)
@@ -1657,7 +1653,7 @@ class Plotter():
         u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
         # project to function space
-        u_i_tot_ultraslow_I = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
+        u_i_tot_ultraslow_I = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
 
         n = int(110*1e3)
         # ultraslow input
@@ -1675,12 +1671,11 @@ class Plotter():
         u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
         # project to function space
-        u_i_tot_ultraslow_II = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
-        
+        u_i_tot_ultraslow_II = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
+
         n = int(115*1e3)
         alpha_i = self.read_from_file_III(n, 0)
         p_e = self.read_from_file_III(n, 9)
-        alpha_e = 0.6 - alpha_i
 
         # intracellular hydrostatic pressure
         tau = K_m*(alpha_i - float(self.model.alpha_i_init))
@@ -1692,22 +1687,21 @@ class Plotter():
         u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
         # project to function space
-        u_i_tot_ultraslow_III = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
+        u_i_tot_ultraslow_III = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
 
-        ax2 = fig.add_subplot(2,3,2, xlim=xlim, ylim=[-15, 15])
+        ax2 = fig.add_subplot(2, 3, 2, xlim=xlim, ylim=[-15, 15])
         plt.title(r'0.05 Hz', fontsize=fosi)
         plt.xlabel(xlabel_x, fontsize=fosi)
         plt.xticks(xticks, xticklabels)
         df.plot(u_i_tot_ultraslow_I, label='$t=105$ s', color=t0, linewidth=lw)
         df.plot(u_i_tot_ultraslow_II, label='$t=110$ s', color=t1, linewidth=lw)
-        df.plot(u_i_tot_ultraslow_III, label='$t=115$ s', color=t2, linewidth=lw)        
+        df.plot(u_i_tot_ultraslow_III, label='$t=115$ s', color=t2, linewidth=lw)
         ax2.legend(loc='lower right')
 
         n = int(100)
         # constant input
         alpha_i = self.read_from_file_I(n, 0)
         p_e = self.read_from_file_I(n, 9)
-        alpha_e = 0.6 - alpha_i
 
         # intracellular hydrostatic pressure
         tau = K_m*(alpha_i - float(self.model.alpha_i_init))
@@ -1719,9 +1713,9 @@ class Plotter():
         u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
         # project to function space
-        u_i_tot_constant = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
-       
-        ax3 = fig.add_subplot(2,3,3, xlim=xlim, ylim=[-15, 15])
+        u_i_tot_constant = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
+
+        ax3 = fig.add_subplot(2, 3, 3, xlim=xlim, ylim=[-15, 15])
         plt.title(r'constant', fontsize=fosi)
         plt.xlabel(xlabel_x, fontsize=fosi)
         plt.xticks(xticks, xticklabels)
@@ -1738,7 +1732,6 @@ class Plotter():
             
             alpha_i = self.read_from_file_I(n, 0)
             p_e = self.read_from_file_I(n, 9)
-            alpha_e = 0.6 - alpha_i
 
             # intracellular hydrostatic pressure
             tau = K_m*(alpha_i - float(self.model.alpha_i_init))
@@ -1750,8 +1743,8 @@ class Plotter():
             u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
             # project to function space
-            u_i_tot = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
-            
+            u_i_tot = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
+
             # find max
             max_u_i = max(u_i_tot.vector())
 
@@ -1759,7 +1752,7 @@ class Plotter():
 
             # get input/decay fluxes
             j_in_ = df.Expression('(x[0] > L1)*(x[0] < L2)*(t >= tS)*(t <= tE)*j_in',
-                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=n, \
+                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=n,
                        tS=self.model.stim_start, tE=self.model.stim_end, degree=1)
             j_in = self.project_to_function_space(j_in_*1e6)   # convert to umol/(m^2s)
             j_ins_constant.append(j_in(point_time))
@@ -1769,10 +1762,9 @@ class Plotter():
 
         t = 100
         for n in range(int(100*1e3), int(103*1e3)+1, 10):
-            
+
             alpha_i = self.read_from_file_II(n, 0)
             p_e = self.read_from_file_II(n, 9)
-            alpha_e = 0.6 - alpha_i
 
             # intracellular hydrostatic pressure
             tau = K_m*(alpha_i - float(self.model.alpha_i_init))
@@ -1784,8 +1776,8 @@ class Plotter():
             u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
 
             # project to function space
-            u_i_tot = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
-            
+            u_i_tot = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
+
             # find max
             max_u_i = max(u_i_tot.vector())
 
@@ -1793,7 +1785,7 @@ class Plotter():
 
             # get input/decay fluxes
             j_in_ = df.Expression('(x[0] > L1)*(x[0] < L2)*(t >= tS)*(t <= tE)*(j_in/2*sin(2*pi*t) + j_in/2)',
-                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t, \
+                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t,
                        tS=self.model.stim_start, tE=self.model.stim_end, degree=1)
             j_in = self.project_to_function_space(j_in_*1e6)    # convert to umol/(m^2s)
             t += 10e-3
@@ -1804,10 +1796,9 @@ class Plotter():
 
         t = 100
         for n in range(int(100*1e3), int(160*1e3)+1, int(5e2)):
-            
+
             alpha_i = self.read_from_file_III(n, 0)
             p_e = self.read_from_file_III(n, 9)
-            alpha_e = 0.6 - alpha_i
 
             # intracellular hydrostatic pressure
             tau = K_m*(alpha_i - float(self.model.alpha_i_init))
@@ -1817,28 +1808,27 @@ class Plotter():
             u_i_hyd_ = - kappa[0]*df.grad(p_i)
             u_i_osm_ = kappa[0]*R*temperature*df.grad(a_i/alpha_i)
             u_i_tot_ = u_i_hyd_[0] + u_i_osm_[0]
-            
+
             # project to function space
-            u_i_tot = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60) # convert to um/min
-            
+            u_i_tot = self.project_to_function_space(alpha_i*u_i_tot_*1.0e6*60)  # convert to um/min
+
             # find max
             max_u_i = max(u_i_tot.vector())
 
             max_us_ultraslow.append(float(max_u_i))
-            
+
             # get input/decay fluxes
             j_in_ = df.Expression('(x[0] > L1)*(x[0] < L2)*(t >= tS)*(t <= tE)*(j_in/2*sin(2*pi*t*0.05) + j_in/2)',
-                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t, \
+                       L1=L1, L2=L2, j_in=self.model.j_in_const, t=t,
                        tS=self.model.stim_start, tE=self.model.stim_end, degree=1)
             j_in = self.project_to_function_space(j_in_*1e6)    # convert to umol/(m^2s)
             t += 0.5
             j_ins_ultraslow.append(j_in(point_time))
 
-        
-        ax4 = fig.add_subplot(2,3,4, ylim=[-0.2, 14])
+        ax4 = fig.add_subplot(2, 3, 4, ylim=[-0.2, 14])
         plt.ylabel(r'max($\alpha_\mathrm{i} u_\mathrm{i}$) ($\mu$m/min)', fontsize=fosi)
         plt.plot(max_us_slow, color=colors[0], linewidth=lw, zorder=10)
-        ax4.set_xlim([0,300])
+        ax4.set_xlim([0, 300])
         ax4.set_xticks([0, 100, 200, 300])
         ax4.set_xticklabels([100, 101, 102, 103])
         plt.xlabel(r'time (s)', fontsize=fosi)
@@ -1852,9 +1842,9 @@ class Plotter():
         ax4.set_zorder(10)
         ax4.set_frame_on(False)
 
-        ax5 = fig.add_subplot(2,3,5, ylim=[-0.2, 14])
+        ax5 = fig.add_subplot(2, 3, 5, ylim=[-0.2, 14])
         plt.plot(max_us_ultraslow, color=colors[2], linewidth=lw)
-        ax5.set_xlim([0,120])
+        ax5.set_xlim([0, 120])
         ax5.set_xticks([0, 20, 40, 60, 80, 100, 120])
         ax5.set_xticklabels([100, 110, 120, 130, 140, 150, 160])
         plt.xlabel(r'time (s)', fontsize=fosi)
@@ -1868,12 +1858,12 @@ class Plotter():
         ax5.set_zorder(10)
         ax5.set_frame_on(False)
 
-        ax6 = fig.add_subplot(2,3,6, xlim=xlim_T, ylim=[-0.2, 14])
+        ax6 = fig.add_subplot(2, 3, 6, xlim=xlim_T, ylim=[-0.2, 14])
         plt.xlabel(r'time (s)', fontsize=fosi)
         plt.plot(max_us_constant, color=colors[3], linewidth=lw)
-        ax6.set_xlim([0,250])
+        ax6.set_xlim([0, 250])
         ax6.set_xticks([0, 50, 100, 150, 200, 250])
-        
+
         ax6t = ax6.twinx()
         plt.ylabel(r'$j\mathrm{^K_{input}}$($\mu$mol/(m$^2$s))', fontsize=fosi)
         plt.plot(j_ins_constant, color='lightgrey', linewidth=lw)
@@ -1887,7 +1877,7 @@ class Plotter():
         plt.tight_layout()
 
         # add numbering for the subplots (A, B, C etc)
-        letters = [r'\textbf{A}', r'\textbf{B}', r'\textbf{C}', 
+        letters = [r'\textbf{A}', r'\textbf{B}', r'\textbf{C}',
                    r'\textbf{D}', r'\textbf{E}', r'\textbf{F}']
         for num, ax in enumerate([ax1, ax2, ax3, ax4, ax5, ax6]):
             ax.text(-0.18, 1.0, letters[num], transform=ax.transAxes, size=22, weight='bold')
